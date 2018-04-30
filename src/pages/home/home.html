@@ -1,14 +1,36 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>
+            Consulta de Multas - Regional Cali
+        </ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+    <ion-list>
+        <ion-item>
+            <ion-label>Cedula</ion-label>
+            <ion-input [(ngModel)]="cedula"></ion-input>
+        </ion-item>
+
+        <button ion-button block (click)="buscarMultas()">
+        <ion-icon ios="ios-search" md="md-search"></ion-icon> Buscar
+      </button>
+    </ion-list>
+    <ion-list *ngIf="customer">
+        <ion-list-header>Propietario</ion-list-header>
+        <ion-item *ngFor="let c of customer">
+            <h1>{{c.nombre + ' ' + c.apellido}}</h1>
+
+            <ion-item-group *ngFor="let v of c.vehiculos">
+                <ion-item-divider color="light">Placa: {{ v.placa }}</ion-item-divider>
+                <ion-item *ngFor="let m of v.multas">
+                    <h2>{{m.codigo}}</h2>
+                    <p>{{ m.descripcion }}</p>
+                    <p>Estado: {{ (m.estado == '1') ? 'Pagada' : 'Pendiente' }}</p>
+                    <p>Valor: {{ m.valor }}</p>
+                </ion-item>
+            </ion-item-group>
+        </ion-item>
+    </ion-list>
 </ion-content>
