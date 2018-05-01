@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { Customer } from '../../model/customer/customer.model';
 import { CustomerListService } from '../../service/customer-list.service';
 
 @Component({
